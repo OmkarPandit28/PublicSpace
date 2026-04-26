@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, Navigate, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -14,6 +14,7 @@ import { Card } from "@/components/ui/card";
 const Auth = () => {
   const { user, loading } = useAuth();
   const [params] = useSearchParams();
+  const navigate = useNavigate();
   const initialTab = params.get("tab") === "signup" ? "signup" : "signin";
   const [tab, setTab] = useState(initialTab);
   const [busy, setBusy] = useState(false);
@@ -46,8 +47,12 @@ const Auth = () => {
       },
     });
     setBusy(false);
-    if (error) toast.error(error.message);
-    else toast.success("Account created! Welcome.");
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Account created! Welcome.");
+      navigate("/feed");
+    }
   };
 
   const handleSignIn = async (e: React.FormEvent) => {
@@ -63,8 +68,12 @@ const Auth = () => {
       password: parsed.data.password,
     });
     setBusy(false);
-    if (error) toast.error(error.message);
-    else toast.success("Welcome back!");
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Welcome back!");
+      navigate("/feed");
+    }
   };
 
   return (
