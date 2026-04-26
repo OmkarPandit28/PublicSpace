@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { useAuth } from "@/hooks/useAuth";
 
-const Index = () => {
+const Homepage = () => {
   const { user, loading } = useAuth();
   if (loading) return null;
   if (user) return <Navigate to="/feed" replace />;
@@ -104,4 +104,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Homepage;

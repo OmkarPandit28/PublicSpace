@@ -102,9 +102,13 @@ export const PostComposer = ({ onPosted }: Props) => {
       reset();
       await status.refresh();
       onPosted();
-    } catch (e: any) {
-      toast.error(e.message || "Failed to post");
-    } finally {
+   } catch (e) {
+
+    const msg = e instanceof Error ? e.message : "Failed to post";
+
+    toast.error(msg);
+
+    }finally {
       setBusy(false);
     }
   };

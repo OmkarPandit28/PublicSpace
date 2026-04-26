@@ -61,7 +61,7 @@ export const PostCard = ({ post, onChanged }: Props) => {
       .select("id, content, created_at, user_id, profile:profiles!comments_user_id_profiles_fkey(username, display_name, avatar_url)")
       .eq("post_id", post.id)
       .order("created_at", { ascending: true });
-    setComments((data as any) ?? []);
+    setComments((data as Comment[]) ?? []);
   };
 
   const toggleComments = async () => {
