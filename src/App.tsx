@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import Index from "./pages/Index";
+import Index from "./pages/ndex";
 import Auth from "./pages/Auth";
 import Feed from "./pages/Feed";
 import Friends from "./pages/Friends";
