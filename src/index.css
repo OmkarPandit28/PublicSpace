@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Public Space — warm, modern social design system. All HSL. */
+
+@layer base {
+  :root {
+    --background: 30 30% 98%;
+    --foreground: 240 15% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 15% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 15% 12%;
+
+    --primary: 280 75% 56%;
+    --primary-glow: 320 80% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 280 30% 96%;
+    --secondary-foreground: 280 60% 25%;
+
+    --muted: 240 10% 95%;
+    --muted-foreground: 240 8% 45%;
+
+    --accent: 200 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 80% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 65% 42%;
+    --success-foreground: 0 0% 100%;
+
+    --like: 350 85% 60%;
+
+    --border: 240 15% 90%;
+    --input: 240 15% 92%;
+    --ring: 280 75% 56%;
+
+    --radius: 0.85rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(280 75% 56%) 0%, hsl(320 80% 65%) 50%, hsl(20 90% 65%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(280 30% 99%) 100%);
+
+    --shadow-sm: 0 1px 2px hsl(240 15% 12% / 0.06);
+    --shadow-md: 0 4px 16px -4px hsl(240 15% 12% / 0.1);
+    --shadow-lg: 0 12px 40px -8px hsl(280 60% 30% / 0.18);
+    --shadow-glow: 0 0 32px hsl(var(--primary-glow) / 0.35);
+
+    --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 15% 8%;
+    --foreground: 30 20% 96%;
+    --card: 240 15% 11%;
+    --card-foreground: 30 20% 96%;
+    --popover: 240 15% 11%;
+    --popover-foreground: 30 20% 96%;
+    --primary: 280 80% 65%;
+    --primary-glow: 320 85% 70%;
+    --primary-foreground: 240 15% 8%;
+    --secondary: 240 15% 16%;
+    --secondary-foreground: 30 20% 96%;
+    --muted: 240 15% 16%;
+    --muted-foreground: 240 8% 65%;
+    --accent: 200 90% 60%;
+    --accent-foreground: 240 15% 8%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 15% 20%;
+    --input: 240 15% 20%;
+    --ring: 280 80% 65%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground antialiased; font-feature-settings: "cv11", "ss01"; }
+}
+
+@layer utilities {
+  .bg-gradient-primary { background: var(--gradient-primary); }
+  .bg-gradient-hero { background: var(--gradient-hero); }
+  .bg-gradient-card { background: var(--gradient-card); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-soft { box-shadow: var(--shadow-md); }
+  .shadow-elevated { box-shadow: var(--shadow-lg); }
+  .transition-smooth { transition: var(--transition-smooth); }
+  .text-gradient { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; }
+}
