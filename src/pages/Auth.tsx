@@ -37,20 +37,31 @@ const Auth = () => {
       toast.error(Object.values(parsed.error.flatten().fieldErrors).flat()[0] ?? "Invalid input");
       return;
     }
+
     setBusy(true);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: parsed.data.email,
       password: parsed.data.password,
       options: {
-        emailRedirectTo: `${window.location.origin}/feed`,
-        data: { username: parsed.data.username, display_name: parsed.data.displayName },
+        data: {
+          username: parsed.data.username,
+          display_name: parsed.data.displayName,
+        },
       },
     });
     setBusy(false);
+
     if (error) {
       toast.error(error.message);
-    } else {
-      toast.success("Account created! Welcome.");
+      return;
+    }
+
+    if (data.user) {
+      toast.success("Account created successfully!");
+      setEmail("");
+      setPassword("");
+      setUsername("");
+      setDisplayName("");
       navigate("/feed");
     }
   };
@@ -62,16 +73,23 @@ const Auth = () => {
       toast.error(Object.values(parsed.error.flatten().fieldErrors).flat()[0] ?? "Invalid input");
       return;
     }
+
     setBusy(true);
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: parsed.data.email,
       password: parsed.data.password,
     });
     setBusy(false);
+
     if (error) {
       toast.error(error.message);
-    } else {
-      toast.success("Welcome back!");
+      return;
+    }
+
+    if (data.user) {
+      toast.success("Login successful!");
+      setEmail("");
+      setPassword("");
       navigate("/feed");
     }
   };
@@ -129,7 +147,7 @@ const Auth = () => {
                 <div className="space-y-2">
                   <Label htmlFor="su-password">Password</Label>
                   <Input id="su-password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                  <p className="text-xs text-muted-foreground">8+ characters.</p>
+                  <p className="text-xs text-muted-foreground">Minimum 6 characters.</p>
                 </div>
                 <Button type="submit" variant="hero" className="w-full" disabled={busy}>
                   {busy ? "Creating..." : "Create account"}
